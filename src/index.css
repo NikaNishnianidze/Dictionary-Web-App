@@ -1,1 +1,77 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer utilities {
+  .font-sans-custom {
+    font-family: sans-serif;
+  }
+
+  .font-serif-custom {
+    font-family: serif;
+  }
+
+  .font-mono-custom {
+    font-family: monospace;
+  }
+}
+
+@theme {
+  --color-dropdown: #fff;
+  --color-dropdown-dark: #1f1f1f;
+  --color-moon: #a445ed;
+
+  --shadow-dropdown: 0px 5px 30px 0px rgba(0, 0, 0, 0.1);
+  --shadow-dropdown-dark: 0px 5px 30px 0px #a445ed;
+}
+
+html.dark {
+  background-color: #050505;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #757575;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #a729f5;
+}
+
+input:checked + .slider::before {
+  transform: translateX(12px);
+}
