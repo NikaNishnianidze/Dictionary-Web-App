@@ -22,10 +22,16 @@
   --color-dropdown: #fff;
   --color-dropdown-dark: #1f1f1f;
   --color-moon: #a445ed;
+  --color-input: #f4f4f4;
+  --color-input-dark: #1f1f1f;
+  --color-rectangle: #e9e9e9;
+  --color-oval: #8f19e8;
 
   --shadow-dropdown: 0px 5px 30px 0px rgba(0, 0, 0, 0.1);
   --shadow-dropdown-dark: 0px 5px 30px 0px #a445ed;
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
 
 html.dark {
   background-color: #050505;

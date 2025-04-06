@@ -2,11 +2,15 @@ import { useState } from "react";
 import logo from "../../public/assets/logo.svg";
 import dropDown from "../../public/assets/icon-arrow-down.svg";
 import moonIcon from "../../public/assets/icon-moon.svg";
-import { useEffect } from "react";
 
-type TFontType = "sans" | "serif" | "mono";
+import { TFontType } from "../App";
 
-const fontClasses = {
+interface IFont {
+  font: "sans" | "serif" | "mono";
+  setFont: React.Dispatch<React.SetStateAction<TFontType>>;
+}
+
+export const fontClasses = {
   sans: "font-sans-custom",
   serif: "font-serif-custom",
   mono: "font-mono-custom",
@@ -18,8 +22,7 @@ const fontNames = {
   mono: "Mono",
 };
 
-const Header: React.FC = () => {
-  const [font, setFont] = useState<TFontType>("sans");
+const Header: React.FC<IFont> = ({ font, setFont }) => {
   const [open, setOpen] = useState(false);
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
