@@ -37,9 +37,13 @@ const Header: React.FC<IFont> = ({ font, setFont }) => {
   };
 
   return (
-    <header className="flex py-[24px] px-[24px] items-center justify-between">
+    <header className="flex pt-[24px] pb-[24px] px-[24px] items-center justify-between tb:px-[40px] tb:pt-[58px] tb:pb-[51.5px] dk:px-[352px] dk:pt-[66px]">
       <div className="logo">
-        <img src={logo} alt="logo icon" className="w-[28px] h-[32px]" />
+        <img
+          src={logo}
+          alt="logo icon"
+          className="w-[28px] h-[32px] tb:w-[32px] tb:h-[36.5px]"
+        />
       </div>
       <div className="relative flex items-center">
         <button

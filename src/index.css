@@ -29,6 +29,10 @@
 
   --shadow-dropdown: 0px 5px 30px 0px rgba(0, 0, 0, 0.1);
   --shadow-dropdown-dark: 0px 5px 30px 0px #a445ed;
+
+  --breakpoint-mb: 375px;
+  --breakpoint-tb: 768px;
+  --breakpoint-dk: 1440px;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
