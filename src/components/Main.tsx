@@ -1,6 +1,6 @@
 import axios from "axios";
 import searchIcon from "../../public/assets/icon-search.svg";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fontClasses } from "./Header";
 import audioIcon from "../../public/assets/icon-play.svg";
 import ovalIcon from "../../public/assets/Oval.svg";
@@ -42,7 +42,14 @@ const Main: React.FC<IFont> = ({ font }) => {
   const [data, setData] = useState<TPost[]>([]);
   const [error, setError] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string | null>("");
+  const [noResult, setNoResult] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (noResult) {
+      console.log("No result found.");
+    }
+  }, [noResult]);
 
   const FetchInfo = async () => {
     if (!inputValue) {
@@ -51,6 +58,7 @@ const Main: React.FC<IFont> = ({ font }) => {
       return;
     } else {
       setError(false);
+      setNoResult(false);
     }
     try {
       const response = await axios.get(
@@ -63,10 +71,14 @@ const Main: React.FC<IFont> = ({ font }) => {
           }
         );
         setData(uniqueWords);
-        console.log(uniqueWords);
+        setNoResult(false);
+      } else {
+        setNoResult(true);
       }
     } catch (error) {
       console.log("Failed to Fetch Data");
+      setNoResult(true);
+      setData([]);
     }
   };
 
@@ -98,6 +110,19 @@ const Main: React.FC<IFont> = ({ font }) => {
         <p className={`${fontClasses[font]} text-[#FF5252] mt-[23px]`}>
           Whoops, can't be empty…
         </p>
+      )}
+      {noResult && (
+        <div className="flex flex-col items-center mt-[132px]">
+          <p className="text-[32px] tb:text-[64px]">😕</p>
+          <p className="mt-[44px] text-[20px] text-[#2D2D2D] font-bold dark:text-[#fff]">
+            No Definitions Found
+          </p>
+          <p className="mt-[24px] text-[#757575] text-[18px] font-normal max-w-[720px] text-center">
+            Sorry pal, we couldn't find definitions for the word you were
+            looking for. You can try the search again at later time or head to
+            the web instead.
+          </p>
+        </div>
       )}
 
       <div className="info flex flex-col items-center">
@@ -250,7 +275,7 @@ const Main: React.FC<IFont> = ({ font }) => {
                     Source
                   </p>
                   {post.sourceUrls.map((url, index) => (
-                    <div className="flex items-center gap-[9px]">
+                    <div key={index} className="flex items-center gap-[9px]">
                       <a
                         key={index}
                         href={url}
